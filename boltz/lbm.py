@@ -2,7 +2,7 @@ from collections import namedtuple
 
 import torch
 
-from .fluids import LatticeFluid
+from boltz.fluids import LatticeFluid
 
 Directions = namedtuple('Directions', ["x", "y"])
 
@@ -32,13 +32,13 @@ class D2Q9:
 
 class Lattice(D2Q9):
 
-    def __init__(self, fluid, delta_time, delta_space, shape):
-        self.delta_time = delta_time
+    def __init__(self, fluid, delta_space, shape):
         self.delta_space = delta_space
+        self.delta_time = delta_space / self.sound_speed_squared**0.5
+
         self.fluid = LatticeFluid(
             fluid=fluid, 
             delta_time=self.delta_time, 
-            delta_space=self.delta_space
             )
 
         self.shape = shape
