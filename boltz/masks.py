@@ -1,6 +1,6 @@
 import torch
 
-from .naca_airfoil import airfoil
+from boltz.naca_airfoil import airfoil
 
 def point():
     """Returns a single point mask."""

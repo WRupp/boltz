@@ -13,7 +13,7 @@ def sin_source(
     local_moments = lattice.moments[:, anchor[0]:anchor[0]+s[0], anchor[1]:anchor[1]+s[1]]
 
     noise = amplitude * torch.sin(torch.tensor([ time / frequency * 2.0 * torch.pi]))
-    changed_moments = local_moments + torch.ones * noise
+    changed_moments = local_moments + torch.ones(s) * noise
 
     expanded_mask = mask.unsqueeze(0).expand((lattice.q_dims, -1, -1))
     lattice.moments[
@@ -27,7 +27,7 @@ def bounce_back(lattice, mask: torch.Tensor, anchor: tuple[int,int]):
     s = mask.shape
     local_moments = lattice.moments[:, anchor[0]:anchor[0]+s[0], anchor[1]:anchor[1]+s[1]]
     
-    changed_moments = torch.flip(local_moments, [0])
+    changed_moments = torch.flip(local_moments, [0, 1])
 
     expanded_mask = mask.unsqueeze(0).expand((lattice.q_dims, -1, -1))
     lattice.moments[
