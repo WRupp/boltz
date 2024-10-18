@@ -1,5 +1,5 @@
 # Boltz
-A simple implementation of the Lattice Boltzmann Method using pytorch.
+Fluid simulation using pytorch and the Lattice Bolzmann Method.
 
 ![flow with circle](assets/flow_circle.gif)
 
